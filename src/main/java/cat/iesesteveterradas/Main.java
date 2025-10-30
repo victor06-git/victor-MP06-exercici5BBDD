@@ -25,31 +25,6 @@ public class Main {
             // Imprimir les línies a la consola
             lines.forEach(System.out::println);
 
-            // Connexió a BBDD SQLite
-            try {
-                String url = "jdbc:sqlite:" + filePath;
-                conn = DriverManager.getConnection(url);
-                if (conn != null) {
-                    DatabaseMetaData meta = conn.getMetaData();
-                    System.out.println("BBDD driver: " +
-                            meta.getDriverName());
-                }
-                System.out.println("BBDD SQLite connectada");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            // Executar consultes …
-
-            try {
-                if (conn != null) {
-                    conn.close();
-                    System.out.println("DDBB SQLite desconnectada");
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-
         } catch (IOException e) {
             System.out.println("S'ha produït un error en llegir el fitxer: " + e.getMessage());
         }

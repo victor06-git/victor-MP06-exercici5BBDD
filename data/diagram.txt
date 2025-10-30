@@ -1,0 +1,13 @@
+ER diagram (text)
+------------------
+Faccio
+  id PK INTEGER
+  nom VARCHAR(15)
+  resum VARCHAR(500)
+
+Personatge
+  id PK INTEGER
+  nom VARCHAR(15)
+  atac REAL
+  defensa REAL
+  idFaccio FK -> Faccio(id)

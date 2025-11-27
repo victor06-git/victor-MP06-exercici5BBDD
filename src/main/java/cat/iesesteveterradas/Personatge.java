@@ -37,6 +37,7 @@ public class Personatge {
 
     @Override
     public String toString() {
-        return String.format("%d - %s (Atac: %.1f, Defensa: %.1f) [faccio=%d]", id, nom, atac, defensa, idFaccio);
+        return String.format("%d - %s (Atac: %.1f, Defensa: %.1f) [faccio=%d]",
+                id, nom, atac, defensa, idFaccio);
     }
 }

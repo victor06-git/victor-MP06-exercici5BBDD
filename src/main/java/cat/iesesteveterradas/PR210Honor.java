@@ -11,7 +11,6 @@ public class PR210Honor {
     public PR210Honor() {
         db = new DBHelper(DB_FILE);
         db.initializeDatabase();
-
     }
 
     public void run() {
@@ -36,6 +35,7 @@ public class PR210Honor {
                         break;
                     case "5":
                         exit = true;
+                        System.out.println("Sortint...");
                         break;
                     default:
                         System.out.println("Opció invàlida. Intenta-ho de nou.");
@@ -56,13 +56,13 @@ public class PR210Honor {
     private void showTable(Scanner sc) {
         System.out.print("Quina taula vols veure (Faccio / Personatge): ");
         String t = sc.nextLine().trim().toLowerCase();
-        if (t.equals("faccio") || t.equals("facció") || t.equals("facciones")) {
+        if (t.equals("faccio") || t.equals("facció")) {
             List<Faccio> facs = db.getAllFaccions();
-            System.out.println("--- Faccions ---");
+            System.out.println("\n--- Faccions ---");
             facs.forEach(System.out::println);
-        } else if (t.equals("personatge") || t.equals("personatges") || t.equals("personaje")) {
+        } else if (t.equals("personatge") || t.equals("personatges")) {
             List<Personatge> ps = db.getAllPersonatges();
-            System.out.println("--- Personatges ---");
+            System.out.println("\n--- Personatges ---");
             ps.forEach(System.out::println);
         } else {
             System.out.println("Taula desconeguda.");
@@ -71,7 +71,7 @@ public class PR210Honor {
 
     private int chooseFaccio(Scanner sc) {
         List<Faccio> facs = db.getAllFaccions();
-        System.out.println("Tria una facció pel seu id:");
+        System.out.println("\nTria una facció pel seu id:");
         facs.forEach(f -> System.out.println(f.getId() + ") " + f.getNom()));
         System.out.print("id = ");
         String s = sc.nextLine().trim();
@@ -87,11 +87,15 @@ public class PR210Honor {
         int id = chooseFaccio(sc);
         if (id < 0)
             return;
+
         List<Personatge> ps = db.getPersonatgesByFaccio(id);
-        // find faccio name
-        String nomF = db.getAllFaccions().stream().filter(f -> f.getId() == id).map(Faccio::getNom).findFirst()
+        String nomF = db.getAllFaccions().stream()
+                .filter(f -> f.getId() == id)
+                .map(Faccio::getNom)
+                .findFirst()
                 .orElse("(desconegut)");
-        System.out.println("Personatges de la facció: " + nomF);
+
+        System.out.println("\nPersonatges de la facció: " + nomF);
         if (ps.isEmpty())
             System.out.println("(cap personatge)");
         else
@@ -102,10 +106,15 @@ public class PR210Honor {
         int id = chooseFaccio(sc);
         if (id < 0)
             return;
+
         Personatge p = db.getBestAtacantByFaccio(id);
-        String nomF = db.getAllFaccions().stream().filter(f -> f.getId() == id).map(Faccio::getNom).findFirst()
+        String nomF = db.getAllFaccions().stream()
+                .filter(f -> f.getId() == id)
+                .map(Faccio::getNom)
+                .findFirst()
                 .orElse("(desconegut)");
-        System.out.println("Millor atacant de la facció: " + nomF);
+
+        System.out.println("\nMillor atacant de la facció: " + nomF);
         if (p == null)
             System.out.println("(cap personatge)");
         else
@@ -116,10 +125,15 @@ public class PR210Honor {
         int id = chooseFaccio(sc);
         if (id < 0)
             return;
+
         Personatge p = db.getBestDefensorByFaccio(id);
-        String nomF = db.getAllFaccions().stream().filter(f -> f.getId() == id).map(Faccio::getNom).findFirst()
+        String nomF = db.getAllFaccions().stream()
+                .filter(f -> f.getId() == id)
+                .map(Faccio::getNom)
+                .findFirst()
                 .orElse("(desconegut)");
-        System.out.println("Millor defensor de la facció: " + nomF);
+
+        System.out.println("\nMillor defensor de la facció: " + nomF);
         if (p == null)
             System.out.println("(cap personatge)");
         else
